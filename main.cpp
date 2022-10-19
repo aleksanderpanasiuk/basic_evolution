@@ -17,8 +17,7 @@ int main()
 
     Parameters parameters;
     parameters.read_from_file();
-
-    parameters.print_top_parameters(1);
+    parameters.print_top_parameters(10, true);
 
     return 0;
 }
