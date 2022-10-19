@@ -16,9 +16,9 @@ int main()
     points.read_points();
 
     Parameters parameters;
+    parameters.read_from_file();
 
-    parameters.fill_random();
-    parameters.print_top_parameters(10);
+    parameters.print_top_parameters(1);
 
     return 0;
 }

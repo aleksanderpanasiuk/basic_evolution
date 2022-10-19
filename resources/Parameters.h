@@ -10,6 +10,9 @@ class Parameters
 
         void fill_random();
         void print_top_parameters(int);
+        void calculate_function(double, double []);
+        void write_to_file();
+        void read_from_file();
 };
 
 #endif
