@@ -7,13 +7,7 @@
 
 using namespace std;
 
-Points::Points()
-{
-    const int NUMBER_OF_POINTS = 10;
-    pair<double, double> points[10];
-}
-
-void Points::randomize_points(int NUMBER_OF_POINTS)
+void Points::randomize_points()
 {
     srand(time(0));
 
@@ -42,7 +36,7 @@ void Points::randomize_points(int NUMBER_OF_POINTS)
     output_file.close();
 }
 
-void Points::read_points(int NUMBER_OF_POINTS, pair<double, double> points[])
+void Points::read_points()
 {
     ifstream input_file("resources/points.txt");
 
@@ -54,11 +48,11 @@ void Points::read_points(int NUMBER_OF_POINTS, pair<double, double> points[])
     input_file.close();
 }
 
-void Points::print_points(int NUMBER_OF_POINTS, pair<double, double> points[])
+void Points::print_points()
 {
     for (int i = 0; i < NUMBER_OF_POINTS; i++)
     {
         cout << fixed << setprecision(3) 
-        << "x: " << points[i].first << "\ty: " << points[i].second << "\n";
+        << i+1 << "\tx: " << points[i].first << "\ty: " << points[i].second << "\n";
     }
 }
