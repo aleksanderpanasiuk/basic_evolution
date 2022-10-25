@@ -18,6 +18,9 @@ class Parameters
         void calculate_fitness(int, std::pair<double, double>[]);
         void fitness_sort();
         static bool compare_fitness(double [], double []);
+        void kill_bottom(int);
+        void pairing(int);
+        std::pair<std::vector<double>, std::vector<double>> mating(int, int);
 };
 
 #endif

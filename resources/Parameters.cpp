@@ -125,3 +125,94 @@ void Parameters::read_from_file()
 
     input_file.close();
 }
+
+void Parameters::kill_bottom(int n)
+{
+    for (int i = POPULATION_SIZE-n; i < POPULATION_SIZE; i++)
+    {
+        for (int j = 0; j <= NUMBER_OF_PARAMETERS; j++)
+            parameters[i][j] = 0;
+    }
+
+    pairing(n);
+}
+
+void Parameters::pairing(int n)
+{
+    vector<int> population;
+    vector<pair<int, int>> pairs;
+
+    for (int i = 0; i < POPULATION_SIZE-n; i++)
+        population.push_back(i);
+
+    random_shuffle(population.begin(), population.end());
+
+    for (int i = 0; i < POPULATION_SIZE-n; i+= 2)
+    {
+        pairs.push_back(make_pair(population[i], population[i+1]));
+    }
+
+    for (int i = 0; i < (POPULATION_SIZE-n)/2; i++)
+    {
+        pair<vector<double>, vector<double>> p = mating(pairs[i].first, pairs[i].second);
+
+        parameters[n + (i*2)] = p.first;
+        parameters[n + (i*2)+1] = p.second;
+    }
+}
+
+pair<vector<double>, vector<double>> Parameters::mating(int a, int b)
+{
+    vector<double> c;
+    vector<double> d;
+    vector<int> dom_genes;
+    srand(time(0));
+
+    for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
+    {
+        c.push_back(NULL);
+        d.push_back(NULL);
+        dom_genes.push_back(i);
+    }
+
+    random_shuffle(dom_genes.begin(), dom_genes.end());
+
+    for (int i = 0; i < NUMBER_OF_PARAMETERS/2; i++)
+    {
+        c[dom_genes[i]] = parameters[a][dom_genes[i]];
+        if (rand()%100 <= 5)
+        {
+            if (rand()%2 == 1)
+                c[dom_genes[i]] *= 0.7;
+            else
+                c[dom_genes[i]] *= 1.3;
+        }
+
+        d[dom_genes[i]] = parameters[a][dom_genes[i+5]];
+        if (rand()%100 <= 5)
+        {
+            if (rand()%2 == 1)
+                d[dom_genes[i]] *= 0.7;
+            else
+                d[dom_genes[i]] *= 1.3;
+        }
+    }
+
+    int j = 0;
+    for (int i = 0; i < NUMBER_OF_PARAMETERS/2; i++)
+    {
+        if (c[i] == NULL)
+            c[i] = parameters[b][j];
+    }
+
+    for (int i = 0; i < NUMBER_OF_PARAMETERS/2; i++)
+    {
+        if (d[i] == NULL)
+            d[i] = parameters[b][j];
+    }
+
+    c.push_back(0);
+    d.push_back(0);
+    
+    return make_pair(c, d);
+}
