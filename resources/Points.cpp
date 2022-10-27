@@ -5,6 +5,9 @@
 #include<fstream>
 #include<iomanip>
 
+
+/*  Generates set number of points and saves them in "resources/points.txt" file*/
+
 void Points::randomize_points()
 {
     srand(time(0));
@@ -34,9 +37,20 @@ void Points::randomize_points()
     output_file.close();
 }
 
+
+/*  Reads points from "resources/points.txt" file.
+    If file does not exist runs randomize_points() function*/
+
 void Points::read_points()
 {
     std::ifstream input_file("resources/points.txt");
+
+    if (input_file.fail())
+    {
+        randomize_points();
+
+        std::ifstream input_file("resources/points.txt");
+    }
 
     for (int i = 0; i < NUMBER_OF_POINTS; i++)
     {
@@ -45,6 +59,9 @@ void Points::read_points()
 
     input_file.close();
 }
+
+
+/*  Prints coordinates of every point to standard output*/
 
 void Points::print_points()
 {
