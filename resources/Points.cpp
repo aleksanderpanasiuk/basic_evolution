@@ -5,20 +5,18 @@
 #include<fstream>
 #include<iomanip>
 
-using namespace std;
-
 void Points::randomize_points()
 {
     srand(time(0));
 
-    vector<pair <double, double>> v;
+    std::vector<std::pair <double, double>> v;
 
     for (int i = 0; i < NUMBER_OF_POINTS; i++)
     {
         double x = ((rand() % 10000) / 1000.0);
         double y = ((rand() % 10000) / 1000.0) - 5;
 
-        pair <double, double> p;
+        std::pair <double, double> p;
         p.first = x;
         p.second = y;
         
@@ -26,7 +24,7 @@ void Points::randomize_points()
     }
 
     sort(v.begin(), v.end());
-    ofstream output_file("resources/points.txt");
+    std::ofstream output_file("resources/points.txt");
 
     for (int i = 0; i < NUMBER_OF_POINTS; i++)
     {
@@ -38,7 +36,7 @@ void Points::randomize_points()
 
 void Points::read_points()
 {
-    ifstream input_file("resources/points.txt");
+    std::ifstream input_file("resources/points.txt");
 
     for (int i = 0; i < NUMBER_OF_POINTS; i++)
     {
@@ -52,7 +50,7 @@ void Points::print_points()
 {
     for (int i = 0; i < NUMBER_OF_POINTS; i++)
     {
-        cout << fixed << setprecision(3) 
+        std::cout << std::fixed << std::setprecision(3) 
         << i+1 << "\tx: " << points[i].first << "\ty: " << points[i].second << "\n";
     }
 }

@@ -8,8 +8,6 @@
 #include "resources/Points.h"
 #include "resources/Parameters.h"
 
-using namespace std;
-
 int main()
 {
     int creatures_to_kill = 100;
@@ -24,7 +22,7 @@ int main()
 
     for (int i = 0; i < number_of_generations; i++)
     {
-        // cout << i << " gen: \n";
+        // std::cout << i << " gen: \n";
         // parameters.print_top_parameters(3, true);
 
         parameters.kill_bottom(creatures_to_kill);
@@ -33,7 +31,7 @@ int main()
         parameters.fitness_sort();
     }
 
-    cout << number_of_generations << " gen: \n";
+    std::cout << number_of_generations << " gen: \n";
     parameters.print_top_parameters(3, true);
 
     return 0;
