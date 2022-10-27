@@ -5,6 +5,9 @@
 #include<algorithm>
 #include<vector>
 
+
+/*  Fills parameters vector wtich vectors of zereos */
+
 Parameters::Parameters()
 {
     std::vector<double> v;
@@ -19,6 +22,9 @@ Parameters::Parameters()
         parameters.push_back(v);
     }
 }
+
+
+/*  Changes every parameter value to random */
 
 void Parameters::fill_random()
 {
@@ -35,6 +41,9 @@ void Parameters::fill_random()
         parameters[i][10] = 0;
     }
 }
+
+
+/*  Prints n sets of parameters to standart output */
 
 void Parameters::print_top_parameters(int n=10, bool only_fitness=false)
 {
@@ -54,6 +63,11 @@ void Parameters::print_top_parameters(int n=10, bool only_fitness=false)
     }
 }
 
+
+/*  Calculates f(x) function for:
+    f(x) = a1 * sin(k1x+p1) + a2 * sin(k2x+p2) + a3 * sin(k3*x+p3) + c
+*/
+
 double Parameters::calculate_function(double x, std::vector<double> par)
 {
     const double PI = 3.1415;
@@ -64,6 +78,9 @@ double Parameters::calculate_function(double x, std::vector<double> par)
 
     return y;
 }
+
+
+/*  Calculates difference of given function and points for the same x */
 
 void Parameters::calculate_fitness(int no_points, std::pair<double, double> points[])
 {
@@ -82,6 +99,9 @@ void Parameters::calculate_fitness(int no_points, std::pair<double, double> poin
     }
 }
 
+
+/*  Sorts vector of parameters based on their fitness */
+
 void Parameters::fitness_sort()
 {
     sort(parameters.begin(), parameters.end(), 
@@ -90,6 +110,10 @@ void Parameters::fitness_sort()
         return a[10] < b[10];
     });
 }
+
+
+
+/*  Writes value of all parameters to "resources/parameters.txt" file */
 
 void Parameters::write_to_file()
 {
@@ -109,9 +133,25 @@ void Parameters::write_to_file()
 }
 
 
+/*  Reads value of parameters from "resources/parameters.txt" file.
+    If the file does not exist function fills vector of parameters with zeroes.
+*/
+
 void Parameters::read_from_file()
 {
     std::ifstream input_file("resources/parameters.txt");
+
+    // File not found = fill parameters with zero
+    if (input_file.fail())
+    {
+        for (int i = 0; i < POPULATION_SIZE; i++)
+        {
+            for (int j = 0; j <= NUMBER_OF_PARAMETERS; j++)
+            {
+                parameters[i][j] = 0;
+            }
+        }        
+    }
 
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
@@ -124,6 +164,9 @@ void Parameters::read_from_file()
     input_file.close();
 }
 
+
+/*  Fills last n rows of parameters with zeroes */
+
 void Parameters::kill_bottom(int n)
 {
     for (int i = POPULATION_SIZE-n; i < POPULATION_SIZE; i++)
@@ -134,6 +177,9 @@ void Parameters::kill_bottom(int n)
 
     pairing(n);
 }
+
+
+/*  Chooes random pairs of vectors and calls mating() with them as arguments */
 
 void Parameters::pairing(int n)
 {
@@ -159,54 +205,27 @@ void Parameters::pairing(int n)
     }
 }
 
+
+/*  Chooses random genes from both parants and creates a pair of parameters*/
+
 std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, int b)
 {
     std::vector<double> c;
     std::vector<double> d;
-    std::vector<int> dom_genes;
     srand(time(0));
 
     for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
     {
-        c.push_back(NULL);
-        d.push_back(NULL);
-        dom_genes.push_back(i);
-    }
-
-    random_shuffle(dom_genes.begin(), dom_genes.end());
-
-    for (int i = 0; i < NUMBER_OF_PARAMETERS/2; i++)
-    {
-        c[dom_genes[i]] = parameters[a][dom_genes[i]];
-        if (rand()%100 <= 5)
+        if (0 == rand()%2)
         {
-            if (rand()%2 == 1)
-                c[dom_genes[i]] *= 0.7;
-            else
-                c[dom_genes[i]] *= 1.3;
+            c.push_back(parameters[a][i]);
+            d.push_back(parameters[b][i]);
         }
-
-        d[dom_genes[i]] = parameters[a][dom_genes[i+5]];
-        if (rand()%100 <= 5)
+        else
         {
-            if (rand()%2 == 1)
-                d[dom_genes[i]] *= 0.7;
-            else
-                d[dom_genes[i]] *= 1.3;
+            c.push_back(parameters[b][i]);
+            d.push_back(parameters[a][i]);
         }
-    }
-
-    int j = 0;
-    for (int i = 0; i < NUMBER_OF_PARAMETERS/2; i++)
-    {
-        if (c[i] == NULL)
-            c[i] = parameters[b][j];
-    }
-
-    for (int i = 0; i < NUMBER_OF_PARAMETERS/2; i++)
-    {
-        if (d[i] == NULL)
-            d[i] = parameters[b][j];
     }
 
     c.push_back(0);
