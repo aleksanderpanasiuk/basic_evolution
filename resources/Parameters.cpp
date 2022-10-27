@@ -232,7 +232,8 @@ double Parameters::mutation_result()
 }
 
 /*  Chooses random genes from both parants and creates a pair of parameters
-    with */
+    with random chance to mutate
+*/
 
 std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, int b)
 {
