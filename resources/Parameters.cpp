@@ -206,7 +206,33 @@ void Parameters::pairing(int n)
 }
 
 
-/*  Chooses random genes from both parants and creates a pair of parameters*/
+/*  Calculate mutation value randombly.
+    5% chance for mutation to occur and 50%
+    chance for it to make the value lower and 
+    50% for making it higher.
+*/
+
+double Parameters::mutation_result()
+{
+    srand(time(0));
+
+    double mutation_value = 1;
+    int chance_for_mutation = rand() % 100;
+
+    if (5 <= chance_for_mutation)
+    {
+        if (1 == rand()%2)
+            mutation_value = 0.7;
+        else
+            mutation_value = 1.3;
+    }
+
+    return mutation_value;
+
+}
+
+/*  Chooses random genes from both parants and creates a pair of parameters
+    with */
 
 std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, int b)
 {
@@ -218,13 +244,19 @@ std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, in
     {
         if (0 == rand()%2)
         {
-            c.push_back(parameters[a][i]);
-            d.push_back(parameters[b][i]);
+            double new_gene_C = parameters[a][i] * mutation_result();
+            c.push_back(new_gene_C);
+
+            double new_gene_D = parameters[b][i] * mutation_result();
+            d.push_back(new_gene_D);
         }
         else
         {
-            c.push_back(parameters[b][i]);
-            d.push_back(parameters[a][i]);
+            double new_gene_C = parameters[b][i] * mutation_result();
+            c.push_back(new_gene_C);
+
+            double new_gene_D = parameters[a][i] * mutation_result();
+            d.push_back(new_gene_D);
         }
     }
 

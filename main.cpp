@@ -11,7 +11,7 @@
 int main()
 {
     int creatures_to_kill = 100;
-    int number_of_generations = 10000;
+    int number_of_generations = 100;
     Points points;
     points.read_points();
 

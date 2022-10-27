@@ -21,6 +21,7 @@ class Parameters
         void kill_bottom(int);
         void pairing(int);
         std::pair<std::vector<double>, std::vector<double>> mating(int, int);
+        double mutation_result();
 };
 
 #endif
