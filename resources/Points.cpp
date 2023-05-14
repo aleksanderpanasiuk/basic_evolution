@@ -79,14 +79,14 @@ void Points::read_points()
     input_file.close();
 }
 
-
-/*  Prints coordinates of every point to standard output*/
-
-void Points::print_points()
+std::ostream& operator<<(std::ostream& os, Points points)
 {
-    for (int i = 0; i < number_of_points; i++)
+    for (int i = 0; i < points.get_number_of_points(); i++)
     {
-        std::cout << std::fixed << std::setprecision(3)
-        << i+1 << "\tx: " << points[i].first << "\ty: " << points[i].second << "\n";
+        os << std::fixed << std::setprecision(3)
+        << i+1 << "\tx: " << points.points[i].first << "\ty: "
+        << points.points[i].second << "\n";
     }
+
+    return os;
 }
