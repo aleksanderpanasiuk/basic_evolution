@@ -1,12 +1,31 @@
 #include "Points.h"
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<fstream>
-#include<iomanip>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <iomanip>
 
 
 /*  Generates set number of points and saves them in "resources/points.txt" file*/
+
+Points::Points(int n_points)
+{
+    set_number_of_points(n_points);
+}
+
+void Points::set_number_of_points(int n_points)
+{
+    if (n_points < 0)
+        throw std::invalid_argument("Number of points can't be negative");
+
+    number_of_points = n_points;
+}
+
+
+int Points::get_number_of_points()
+{
+    return number_of_points;
+}
 
 void Points::randomize_points()
 {
@@ -14,7 +33,7 @@ void Points::randomize_points()
 
     std::vector<std::pair <double, double>> v;
 
-    for (int i = 0; i < NUMBER_OF_POINTS; i++)
+    for (int i = 0; i < number_of_points; i++)
     {
         double x = ((rand() % 10000) / 1000.0);
         double y = ((rand() % 10000) / 1000.0) - 5;
@@ -22,14 +41,14 @@ void Points::randomize_points()
         std::pair <double, double> p;
         p.first = x;
         p.second = y;
-        
+
         v.push_back(p);
     }
 
     sort(v.begin(), v.end());
     std::ofstream output_file("resources/points.txt");
 
-    for (int i = 0; i < NUMBER_OF_POINTS; i++)
+    for (int i = 0; i < number_of_points; i++)
     {
         output_file << v[i].first << " " << v[i].second << "\n";
     }
@@ -52,7 +71,7 @@ void Points::read_points()
         std::ifstream input_file("resources/points.txt");
     }
 
-    for (int i = 0; i < NUMBER_OF_POINTS; i++)
+    for (int i = 0; i < number_of_points; i++)
     {
         input_file >> points[i].first >> points[i].second;
     }
@@ -65,9 +84,9 @@ void Points::read_points()
 
 void Points::print_points()
 {
-    for (int i = 0; i < NUMBER_OF_POINTS; i++)
+    for (int i = 0; i < number_of_points; i++)
     {
-        std::cout << std::fixed << std::setprecision(3) 
+        std::cout << std::fixed << std::setprecision(3)
         << i+1 << "\tx: " << points[i].first << "\ty: " << points[i].second << "\n";
     }
 }

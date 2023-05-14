@@ -1,10 +1,10 @@
-#include<iostream>
-#include<cstdlib>
-#include<time.h>
-#include<fstream>
-#include<iomanip>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+#include <fstream>
+#include <iomanip>
+#include <vector>
+#include <algorithm>
 #include "resources/Points.h"
 #include "resources/Parameters.h"
 
@@ -12,7 +12,7 @@ int main()
 {
     int creatures_to_kill = 100;
     int number_of_generations = 1000;
-    Points points;
+    Points points(10);
     points.read_points();
 
     Parameters parameters;
@@ -27,7 +27,7 @@ int main()
 
         parameters.kill_bottom(creatures_to_kill);
         parameters.pairing(creatures_to_kill);
-        parameters.calculate_fitness(points.NUMBER_OF_POINTS, points.points);
+        parameters.calculate_fitness(points.get_number_of_points(), points.points);
         parameters.fitness_sort();
     }
 
