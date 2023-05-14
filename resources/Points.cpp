@@ -18,6 +18,9 @@ void Points::set_number_of_points(int n_points)
     if (n_points < 0)
         throw std::invalid_argument("Number of points can't be negative");
 
+    if (n_points > 10)
+        throw std::invalid_argument("Number of points can't be larger than 10");
+
     number_of_points = n_points;
 }
 
