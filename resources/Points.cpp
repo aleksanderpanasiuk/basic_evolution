@@ -6,7 +6,7 @@
 #include <iomanip>
 
 
-/*  Generates set number of points and saves them in "resources/points.txt" file*/
+/*  Generates set number of points and saves them in "resources/points.csv" file*/
 
 Points::Points(int n_points)
 {
@@ -49,34 +49,39 @@ void Points::randomize_points()
     }
 
     sort(v.begin(), v.end());
-    std::ofstream output_file("resources/points.txt");
+    std::ofstream output_file(file_path);
+    output_file << "x, y\n";
 
     for (int i = 0; i < number_of_points; i++)
     {
-        output_file << v[i].first << " " << v[i].second << "\n";
+        output_file << v[i].first << ", " << v[i].second << "\n";
     }
 
     output_file.close();
 }
 
 
-/*  Reads points from "resources/points.txt" file.
+/*  Reads points from "resources/points.csv" file.
     If file does not exist runs randomize_points() function*/
 
 void Points::read_points()
 {
-    std::ifstream input_file("resources/points.txt");
+    std::ifstream input_file(file_path);
 
     if (input_file.fail())
     {
         randomize_points();
 
-        std::ifstream input_file("resources/points.txt");
+        std::ifstream input_file(file_path);
     }
+
+    std::string header;
+    input_file >> header >> header;
 
     for (int i = 0; i < number_of_points; i++)
     {
-        input_file >> points[i].first >> points[i].second;
+        std::string comma;
+        input_file >> points[i].first >> comma >> points[i].second;
     }
 
     input_file.close();
