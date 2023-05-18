@@ -1,7 +1,7 @@
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 class Parameters
 {

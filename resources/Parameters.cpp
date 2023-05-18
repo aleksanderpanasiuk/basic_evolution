@@ -1,9 +1,9 @@
 #include "Parameters.h"
-#include<iostream>
-#include<cmath>
-#include<fstream>
-#include<algorithm>
-#include<vector>
+#include <iostream>
+#include <cmath>
+#include <fstream>
+#include <algorithm>
+#include <vector>
 
 
 /*  Fills parameters vector wtich vectors of zereos */
@@ -34,7 +34,7 @@ void Parameters::fill_random()
     {
         for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
         {
-            double random_number = ((rand() % 200000) / 1000.0) - 100;
+            double random_number = ((rand() % 200000) / 10000.0) - 10;
             parameters[i][j] = random_number;
         }
 
@@ -86,16 +86,19 @@ void Parameters::calculate_fitness(int no_points, std::pair<double, double> poin
 {
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
+        parameters[i][NUMBER_OF_PARAMETERS] = 0;
+
         for (int j = 0; j < no_points; j++)
         {
-            double x = points[i].first;
+            double x = points[j].first;
             double y = calculate_function(x, parameters[i]);
-            double points_y = points[i].second;
+            double point_y = points[j].second;
+            double fitness = std::abs(point_y - y);
 
-            parameters[i][NUMBER_OF_PARAMETERS] += (points_y - y) * (points_y - y);
+            parameters[i][NUMBER_OF_PARAMETERS] += (fitness * fitness);
         }
 
-        parameters[i][NUMBER_OF_PARAMETERS] /= no_points;
+        // parameters[i][NUMBER_OF_PARAMETERS] /= no_points;
     }
 }
 
@@ -104,7 +107,7 @@ void Parameters::calculate_fitness(int no_points, std::pair<double, double> poin
 
 void Parameters::fitness_sort()
 {
-    sort(parameters.begin(), parameters.end(), 
+    sort(parameters.begin(), parameters.end(),
     [] (const std::vector<double> &a, const std::vector<double> &b)
     {
         return a[10] < b[10];
@@ -112,18 +115,19 @@ void Parameters::fitness_sort()
 }
 
 
-
-/*  Writes value of all parameters to "resources/parameters.txt" file */
+/*  Writes value of all parameters to "resources/parameters.csv" file */
 
 void Parameters::write_to_file()
 {
-    std::ofstream output_file("resources/parameters.txt");
+    std::ofstream output_file("resources/parameters.csv");
+
+    output_file << "a1, k1, p1, a2, k2, p2, a3, k3, p3, c, fitness\n";
 
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
         for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
         {
-            output_file << parameters[i][j] << ' ';
+            output_file << parameters[i][j] << ", ";
         }
 
         output_file << parameters[i][NUMBER_OF_PARAMETERS] << "\n";
@@ -133,35 +137,36 @@ void Parameters::write_to_file()
 }
 
 
-/*  Reads value of parameters from "resources/parameters.txt" file.
+/*  Reads value of parameters from "resources/parameters.csv" file.
     If the file does not exist function fills vector of parameters with zeroes.
 */
 
 void Parameters::read_from_file()
 {
-    std::ifstream input_file("resources/parameters.txt");
+    std::ifstream input_file("resources/parameters.csv");
 
-    // File not found = fill parameters with zero
+    // File not found = randomize parameters
     if (input_file.fail())
+        fill_random();
+    else
     {
+        for (int i = 0; i <= NUMBER_OF_PARAMETERS+1; i++)
+        {
+            std::string header;
+            input_file >> header;
+        }
+
         for (int i = 0; i < POPULATION_SIZE; i++)
         {
             for (int j = 0; j <= NUMBER_OF_PARAMETERS; j++)
             {
-                parameters[i][j] = 0;
+                std::string comma;
+                input_file >> parameters[i][j] >> comma;
             }
-        }        
-    }
-
-    for (int i = 0; i < POPULATION_SIZE; i++)
-    {
-        for (int j = 0; j <= NUMBER_OF_PARAMETERS; j++)
-        {
-            input_file >> parameters[i][j];
         }
-    }
 
-    input_file.close();
+        input_file.close();
+    }
 }
 
 
@@ -208,7 +213,7 @@ void Parameters::pairing(int n)
 
 /*  Calculate mutation value randombly.
     5% chance for mutation to occur and 50%
-    chance for it to make the value lower and 
+    chance for it to make the value lower and
     50% for making it higher.
 */
 
@@ -263,6 +268,6 @@ std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, in
 
     c.push_back(0);
     d.push_back(0);
-    
+
     return make_pair(c, d);
 }
