@@ -6,6 +6,7 @@ class Points
 {
     private:
         int number_of_points;
+        std::string file_path = "resources/points.csv";
 
     public:
         Points(int n_points);
