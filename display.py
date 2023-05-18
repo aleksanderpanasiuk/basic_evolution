@@ -3,9 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-figure, axis = plt.subplots(2, 2)
-
-
 def position(n):
     if n == 0:
         return 0, 0
@@ -32,21 +29,25 @@ def show(n, number_of_generations):
 
     x = np.linspace(0, 10, 100)
 
-    for i in range(3):
+    no_creatures = 3
+    for i in range(no_creatures):
         par = list(parameters.loc[i])
 
         y = par[0] * np.sin((par[1]*x + par[2])*np.pi/180) + \
             par[3] * np.sin((par[4]*x + par[5])*np.pi/180) + \
             par[6] * np.sin((par[7]*x + par[8])*np.pi/180) + par[9]
 
-        axis[pos_x, pos_y].plot(x, y)
-        legend.append(f"Creature nr {str(i)}")
+        axis[pos_x, pos_y].plot(x, y, linewidth=no_creatures-i)
+        legend.append(f"Creature nr {i+1}")
 
     axis[pos_x, pos_y].set_title(f"Generation {number_of_generations}")
     axis[pos_x, pos_y].legend(legend)
 
 
 if __name__ == "__main__":
+    figure, axis = plt.subplots(2, 2)
+    figure.canvas.manager.set_window_title("Basic Evolution results")
+
     for i in range(2, 6):
         show(i, i*20)
 
