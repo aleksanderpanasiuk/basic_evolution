@@ -119,7 +119,7 @@ void Parameters::write_to_file(std::string file_path)
 {
     std::ofstream output_file(file_path);
 
-    output_file << "a1, k1, p1, a2, k2, p2, a3, k3, p3, c, fitness\n";
+    output_file << "a1,k1,p1,a2,k2,p2,a3,k3,p3,c,fitness\n";
 
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
@@ -148,11 +148,8 @@ void Parameters::read_from_file(std::string file_path)
         fill_random();
     else
     {
-        for (int i = 0; i <= NUMBER_OF_PARAMETERS+1; i++)
-        {
-            std::string header;
-            input_file >> header;
-        }
+        std::string header;
+        input_file >> header;
 
         for (int i = 0; i < POPULATION_SIZE; i++)
         {

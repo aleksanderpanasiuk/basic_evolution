@@ -48,7 +48,7 @@ void Points::randomize_points()
 
     sort(v.begin(), v.end());
     std::ofstream output_file(file_path);
-    output_file << "x, y\n";
+    output_file << "x,y\n";
 
     for (int i = 0; i < number_of_points; i++)
     {
@@ -74,7 +74,7 @@ void Points::read_points()
     }
 
     std::string header;
-    input_file >> header >> header;
+    input_file >> header;
 
     for (int i = 0; i < number_of_points; i++)
     {
