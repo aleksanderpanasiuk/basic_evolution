@@ -19,8 +19,6 @@ int main()
     Parameters parameters;
     parameters.fill_random();
 
-    std::cout << points;
-
     for (int i = 0; i <= number_of_generations; i++)
     {
         parameters.kill_bottom(creatures_to_kill);
@@ -31,11 +29,9 @@ int main()
             std::string file_path = "resources/generations/parameters_" +
                 std::to_string(i) + ".csv";
             parameters.write_to_file(file_path);
+            parameters.print_top_parameters(3, true);
         }
     }
-
-    std::cout << number_of_generations << " gen: \n";
-    parameters.print_top_parameters(3, true);
     parameters.write_to_file("resources/parameters.csv");
 
     return 0;

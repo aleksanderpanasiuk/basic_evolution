@@ -34,7 +34,7 @@ void Parameters::fill_random()
     {
         for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
         {
-            double random_number = (rand() % 2000000) - 1000000;
+            double random_number = ((rand() % 2000000) / 10000.0) - 100;
             parameters[i][j] = random_number;
         }
 
@@ -227,9 +227,9 @@ double Parameters::mutation_result()
     if (25 >= chance_for_mutation)
     {
         if (1 == rand()%2)
-            mutation_value = 0.5;
+            mutation_value = 0.7;
         else
-            mutation_value = 2.0;
+            mutation_value = 1.5;
     }
 
     return mutation_value;
