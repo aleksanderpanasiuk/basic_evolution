@@ -28,8 +28,6 @@ Parameters::Parameters()
 
 void Parameters::fill_random()
 {
-    srand(time(0));
-
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
         for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
@@ -219,8 +217,6 @@ void Parameters::pairing(int n)
 
 double Parameters::mutation_result()
 {
-    srand(time(0));
-
     double mutation_value = 1;
     int chance_for_mutation = rand() % 100;
 
@@ -244,7 +240,6 @@ std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, in
 {
     std::vector<double> c;
     std::vector<double> d;
-    srand(time(0));
 
     for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
     {

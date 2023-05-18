@@ -10,8 +10,10 @@
 
 int main()
 {
+    srand(time(0));
+
     int creatures_to_kill = 100;
-    int number_of_generations = 1000;
+    int number_of_generations = 100;
     Points points(10);
     points.randomize_points();
     points.read_points();
@@ -24,12 +26,14 @@ int main()
         parameters.kill_bottom(creatures_to_kill);
         parameters.calculate_fitness(points.get_number_of_points(), points.points);
         parameters.fitness_sort();
-        if (i%100 == 0)
+        if (i%10 == 0)
         {
             std::string file_path = "resources/generations/parameters_" +
                 std::to_string(i) + ".csv";
+            std::cout << "gen: " << i << "\n";
             parameters.write_to_file(file_path);
             parameters.print_top_parameters(3, true);
+            std::cout << "\n";
         }
     }
     parameters.write_to_file("resources/parameters.csv");

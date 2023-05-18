@@ -32,8 +32,6 @@ int Points::get_number_of_points()
 
 void Points::randomize_points()
 {
-    srand(time(0));
-
     std::vector<std::pair <double, double>> v;
 
     for (int i = 0; i < number_of_points; i++)

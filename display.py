@@ -29,7 +29,7 @@ def show(number_of_generations):
 
 
 if __name__ == "__main__":
-    show(200)
-    show(600)
-    show(1000)
+    show(20)
+    show(60)
+    show(100)
     plt.show()
