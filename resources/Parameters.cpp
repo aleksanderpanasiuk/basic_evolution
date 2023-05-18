@@ -212,7 +212,7 @@ void Parameters::pairing(int n)
 
 
 /*  Calculate mutation value randombly.
-    5% chance for mutation to occur and 50%
+    25% chance for mutation to occur and 50%
     chance for it to make the value lower and
     50% for making it higher.
 */
@@ -224,12 +224,12 @@ double Parameters::mutation_result()
     double mutation_value = 1;
     int chance_for_mutation = rand() % 100;
 
-    if (5 <= chance_for_mutation)
+    if (25 >= chance_for_mutation)
     {
         if (1 == rand()%2)
-            mutation_value = 0.7;
+            mutation_value = 0.5;
         else
-            mutation_value = 1.3;
+            mutation_value = 2.0;
     }
 
     return mutation_value;
