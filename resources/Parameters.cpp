@@ -34,7 +34,7 @@ void Parameters::fill_random()
     {
         for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
         {
-            double random_number = ((rand() % 200000) / 10000.0) - 10;
+            double random_number = (rand() % 2000000) - 1000000;
             parameters[i][j] = random_number;
         }
 
@@ -115,11 +115,11 @@ void Parameters::fitness_sort()
 }
 
 
-/*  Writes value of all parameters to "resources/parameters.csv" file */
+/*  Writes value of all parameters to file_path file */
 
-void Parameters::write_to_file()
+void Parameters::write_to_file(std::string file_path)
 {
-    std::ofstream output_file("resources/parameters.csv");
+    std::ofstream output_file(file_path);
 
     output_file << "a1, k1, p1, a2, k2, p2, a3, k3, p3, c, fitness\n";
 
@@ -141,9 +141,9 @@ void Parameters::write_to_file()
     If the file does not exist function fills vector of parameters with zeroes.
 */
 
-void Parameters::read_from_file()
+void Parameters::read_from_file(std::string file_path)
 {
-    std::ifstream input_file("resources/parameters.csv");
+    std::ifstream input_file(file_path);
 
     // File not found = randomize parameters
     if (input_file.fail())

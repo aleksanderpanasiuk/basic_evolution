@@ -13,8 +13,8 @@ class Parameters
         void fill_random();
         void print_top_parameters(int, bool);
         double calculate_function(double, std::vector<double>);
-        void write_to_file();
-        void read_from_file();
+        void write_to_file(std::string file_path);
+        void read_from_file(std::string file_path);
         void calculate_fitness(int, std::pair<double, double>[]);
         void fitness_sort();
         static bool compare_fitness(double [], double []);
