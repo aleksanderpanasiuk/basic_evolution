@@ -14,7 +14,7 @@ def position(n):
         return 1, 1
 
 
-def show(n, number_of_generations):
+def add_plot(n, number_of_generations):
     pos_x, pos_y = position(n-2)
 
     points = pd.read_csv("resources/points.csv", header=0)
@@ -49,6 +49,6 @@ if __name__ == "__main__":
     figure.canvas.manager.set_window_title("Basic Evolution results")
 
     for i in range(2, 6):
-        show(i, i*20)
+        add_plot(i, i*20)
 
     plt.show()
