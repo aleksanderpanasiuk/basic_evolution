@@ -8,6 +8,7 @@ class Evolution
     private:
         int creatures_to_kill = 100;
         int number_of_generations = 100;
+        int save_step = 10;
         int number_of_points = 10;
         Points points(number_of_points);
         Parameters parameters;
