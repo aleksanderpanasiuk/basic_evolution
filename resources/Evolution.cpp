@@ -5,7 +5,6 @@
 Evolution::Evolution()
 {
     creatures_to_kill = 100;
-    number_of_points = 10;
 }
 
 void Evolution::randomize_points()
