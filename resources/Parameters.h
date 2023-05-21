@@ -5,10 +5,10 @@
 
 class Parameters
 {
-    public:
+    private:
         const int POPULATION_SIZE = 200, NUMBER_OF_PARAMETERS = 10;
         std::vector<std::vector<double>> parameters;
-
+    public:
         Parameters();
         void fill_random();
         void print_top_parameters(int, bool);
