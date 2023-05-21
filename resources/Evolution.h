@@ -6,19 +6,18 @@
 class Evolution
 {
     private:
-        int creatures_to_kill = 100;
-        int number_of_generations = 100;
-        int save_step = 10;
-        int number_of_points = 10;
-        Points points(number_of_points);
+        int creatures_to_kill;
+        int number_of_points;
+        Points points = *new Points(10);
         Parameters parameters;
 
     public:
+        Evolution();
         void randomize_points();
         void read_points();
         int get_number_of_points();
         void fill_random_parameters();
-        void run_simulation();
+        void run_simulation(int number_of_generations, int save_step);
 };
 
 #endif

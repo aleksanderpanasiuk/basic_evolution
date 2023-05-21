@@ -1,4 +1,12 @@
 #include "Evolution.h"
+#include "Points.h"
+#include "Parameters.h"
+
+Evolution::Evolution()
+{
+    creatures_to_kill = 100;
+    number_of_points = 10;
+}
 
 void Evolution::randomize_points()
 {
@@ -20,7 +28,7 @@ void Evolution::fill_random_parameters()
     parameters.fill_random();
 }
 
-void Evolution::run_simulation()
+void Evolution::run_simulation(int number_of_generations, int save_step)
 {
     for (int i = 0; i <= number_of_generations; i++)
     {
@@ -30,9 +38,9 @@ void Evolution::run_simulation()
 
         if (i%save_step == 0)
         {
+            std::string file_path = "resources/generations/parameters_" +
+                std::to_string(i) + ".csv";
             parameters.write_to_file(file_path);
-            parameters.print_top_parameters(3, true);
-            std::cout << "\n";
         }
     }
 }
