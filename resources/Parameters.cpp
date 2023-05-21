@@ -5,25 +5,6 @@
 #include <algorithm>
 #include <vector>
 
-
-/*  Fills parameters vector wtich vectors of zereos */
-
-Parameters::Parameters()
-{
-    std::vector<double> v;
-
-    for (int i = 0; i <= NUMBER_OF_PARAMETERS; i++)
-    {
-        v.push_back(0);
-    }
-
-    for (int i = 0; i < POPULATION_SIZE; i++)
-    {
-        parameters.push_back(v);
-    }
-}
-
-
 /*  Changes every parameter value to random */
 
 void Parameters::fill_random()
