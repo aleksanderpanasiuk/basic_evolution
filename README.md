@@ -11,4 +11,28 @@ display.py - shows graphs with calculated functions for parameters after 40, 60,
 Example result of display.py after creating data files with main.cpp:
 ![front](resources/examples/Basic_Evolution_results.png)
 
+Example usage of Evolution class as shown in main.cpp:
+'''cpp
+#include <iostream>
+#include "resources/Evolution.h"
+
+int main()
+{
+    srand(time(0));
+
+    // Initialize evolution class with default settings
+    Evolution evolution;
+    // Pick random points and save them
+    evolution.randomize_points();
+    evolution.read_points();
+    // Fills parameters with random values
+    evolution.fill_random_parameters();
+    // Runs simulation for 100 generations and saves parameters of every creature
+    // every 10 generations to "resources/generations/parameters_<generation number>.csv"
+    evolution.run_simulation(100, 10);
+
+    return 0;
+}
+'''
+
 *algorithm inspired by Jerzy Miescicki's book "Wstep do informatyki nie tylko dla informatykow"*
