@@ -12,7 +12,7 @@ Example result of display.py after creating data files with main.cpp:
 ![front](resources/examples/Basic_Evolution_results.png)
 
 Example usage of Evolution class as shown in main.cpp:
-'''cpp
+```cpp
 #include <iostream>
 #include "resources/Evolution.h"
 
@@ -33,6 +33,6 @@ int main()
 
     return 0;
 }
-'''
+```
 
 *algorithm inspired by Jerzy Miescicki's book "Wstep do informatyki nie tylko dla informatykow"*
