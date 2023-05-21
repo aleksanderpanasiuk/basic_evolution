@@ -8,4 +8,7 @@ main.cpp - runs simulation
 
 display.py - shows graphs with calculated functions for parameters after 40, 60, 80 and 100 generations
 
-algorithm inspired by Jerzy Miescicki's book "Wstep do informatyki nie tylko dla informatykow"
+Example result of display.py after creating daa files with main.cpp:
+![front](resources/examples/Basic_Evolution_results.png)
+
+*algorithm inspired by Jerzy Miescicki's book "Wstep do informatyki nie tylko dla informatykow"*
