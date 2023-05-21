@@ -15,7 +15,6 @@ class Points
         int get_number_of_points();
         void randomize_points();
         void read_points();
-        void print_points();
         friend std::ostream& operator<<(std::ostream& os, Points points);
 };
 
