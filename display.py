@@ -18,9 +18,7 @@ def add_plot(n, number_of_generations):
     pos_x, pos_y = position(n-2)
 
     points = pd.read_csv("resources/points.csv", header=0)
-    points_x = list(points["x"])
-    points_y = list(points["y"])
-    axis[pos_x, pos_y].plot(points_x, points_y, 'o')
+    axis[pos_x, pos_y].plot(points["x"], points["y"], 'o')
     legend = ["Points"]
 
     parameters = pd.read_csv(
