@@ -24,7 +24,6 @@ int main()
     Evolution evolution;
     // Pick random points and save them
     evolution.randomize_points();
-    evolution.read_points();
     // Fills parameters with random values
     evolution.fill_random_parameters();
     // Runs simulation for 100 generations and saves parameters of every creature
