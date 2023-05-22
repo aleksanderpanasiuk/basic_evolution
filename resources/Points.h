@@ -1,6 +1,7 @@
 #ifndef POINTS_H
 #define POINTS_H
 #include <iostream>
+#include <vector>
 
 class Points
 {
@@ -10,7 +11,7 @@ class Points
 
     public:
         Points(int n_points);
-        std::pair<double, double> points[10];
+        std::vector<std::pair<double, double>> points;
         void set_number_of_points(int n_points);
         int get_number_of_points();
         void randomize_points();

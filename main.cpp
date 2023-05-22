@@ -7,7 +7,6 @@ int main()
 
     Evolution evolution;
     evolution.randomize_points();
-    evolution.read_points();
     evolution.fill_random_parameters();
     evolution.run_simulation(100, 10);
 

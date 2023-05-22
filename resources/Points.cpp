@@ -47,6 +47,7 @@ void Points::randomize_points()
     }
 
     sort(v.begin(), v.end());
+    points = v;
     std::ofstream output_file(file_path);
     output_file << "x,y\n";
 
