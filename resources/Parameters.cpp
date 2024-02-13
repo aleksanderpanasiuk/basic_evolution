@@ -53,7 +53,7 @@ void Parameters::print_top_parameters(int n=10, bool only_fitness=false)
     f(x) = a1 * sin(k1x+p1) + a2 * sin(k2x+p2) + a3 * sin(k3*x+p3) + c
 */
 
-double Parameters::calculate_function(double x, std::vector<double> par)
+double Parameters::calculate_function(double x, std::vector<double>& par)
 {
     const double PI = 3.1415;
     double y = par[0] * sin((par[1]*x + par[2])*PI/180);
@@ -73,11 +73,11 @@ void Parameters::calculate_fitness(std::vector<std::pair<double, double>>& point
     {
         parameters[i][number_of_parameters] = 0;
 
-        for (int j = 0; j < points.size(); j++)
+        for (std::pair<double, double>& point : points)
         {
-            double x = points[j].first;
+            double x = point.first;
             double y = calculate_function(x, parameters[i]);
-            double point_y = points[j].second;
+            double point_y = point.second;
             double fitness = std::abs(point_y - y);
 
             parameters[i][number_of_parameters] += (fitness * fitness);
@@ -156,7 +156,7 @@ void Parameters::read_from_file(std::string file_path)
 
 void Parameters::kill_bottom(int creatures_to_kill)
 {
-    for (int i = population_size-n; i < population_size; i++)
+    for (int i = population_size-creatures_to_kill; i < population_size; i++)
     {
         for (int j = 0; j <= number_of_parameters; j++)
             parameters[i][j] = 0;
@@ -248,5 +248,5 @@ std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, in
     c.push_back(0);
     d.push_back(0);
 
-    return make_pair(c, d);
+    return {c, d};
 }
