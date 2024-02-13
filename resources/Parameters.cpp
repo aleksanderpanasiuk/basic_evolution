@@ -67,13 +67,13 @@ double Parameters::calculate_function(double x, std::vector<double> par)
 
 /*  Calculates difference of given function and points for the same x */
 
-void Parameters::calculate_fitness(int no_points, std::vector<std::pair<double, double>>& points)
+void Parameters::calculate_fitness(std::vector<std::pair<double, double>>& points)
 {
     for (int i = 0; i < population_size; i++)
     {
         parameters[i][number_of_parameters] = 0;
 
-        for (int j = 0; j < no_points; j++)
+        for (int j = 0; j < points.size(); j++)
         {
             double x = points[j].first;
             double y = calculate_function(x, parameters[i]);
@@ -154,7 +154,7 @@ void Parameters::read_from_file(std::string file_path)
 
 /*  Fills last n rows of parameters with zeroes */
 
-void Parameters::kill_bottom(int n)
+void Parameters::kill_bottom(int creatures_to_kill)
 {
     for (int i = population_size-n; i < population_size; i++)
     {
@@ -162,7 +162,7 @@ void Parameters::kill_bottom(int n)
             parameters[i][j] = 0;
     }
 
-    pairing(n);
+    pairing(creatures_to_kill);
 }
 
 

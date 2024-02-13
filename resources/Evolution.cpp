@@ -39,7 +39,7 @@ void Evolution::run_simulation(int number_of_generations, int save_step)
     for (int i = 0; i <= number_of_generations; i++)
     {
         parameters.kill_bottom(creatures_to_kill);
-        parameters.calculate_fitness(number_of_points, points);
+        parameters.calculate_fitness(points);
         parameters.fitness_sort();
 
         if (i%save_step == 0)
