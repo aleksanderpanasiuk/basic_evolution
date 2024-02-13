@@ -61,7 +61,7 @@ double Parameters::calculate_function(double x, std::vector<double> par)
 
 /*  Calculates difference of given function and points for the same x */
 
-void Parameters::calculate_fitness(int no_points, std::vector<std::pair<double, double>> points)
+void Parameters::calculate_fitness(int no_points, std::vector<std::pair<double, double>>& points)
 {
     for (int i = 0; i < POPULATION_SIZE; i++)
     {

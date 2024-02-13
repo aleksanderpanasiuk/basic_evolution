@@ -15,7 +15,7 @@ class Parameters
         double calculate_function(double x, std::vector<double> par);
         void write_to_file(std::string file_path);
         void read_from_file(std::string file_path);
-        void calculate_fitness(int no_points, std::vector<std::pair<double, double>> points);
+        void calculate_fitness(int no_points, std::vector<std::pair<double, double>>& points);
         void fitness_sort();
         void kill_bottom(int n);
         void pairing(int n);
