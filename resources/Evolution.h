@@ -17,7 +17,7 @@ class Evolution
         std::string parameters_file_path = "resources/generations/parameters_";
 
     public:
-        Evolution();
+        Evolution(int population_size, int number_of_parameters);
         void randomize_points();
         void fill_random_parameters();
         void run_simulation(int number_of_generations, int save_step);

@@ -1,7 +1,8 @@
 #include "Evolution.h"
 #include "Parameters.h"
 
-Evolution::Evolution()
+Evolution::Evolution(int population_size, int number_of_parameters) :
+    parameters(Parameters(population_size, number_of_parameters))
 {
 
 }
