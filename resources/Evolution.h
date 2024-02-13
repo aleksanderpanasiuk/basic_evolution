@@ -13,6 +13,9 @@ class Evolution
         std::vector<std::pair<double, double>> points;
         Parameters parameters;
 
+        std::string points_file_path = "resources/points.csv";
+        std::string parameters_file_path = "resources/generations/parameters_";
+
     public:
         Evolution();
         void randomize_points();

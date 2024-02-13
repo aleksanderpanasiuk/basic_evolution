@@ -16,7 +16,7 @@ void Evolution::randomize_points()
         points.push_back({x, y});
     }
 
-    std::ofstream output_file("resources/points.csv");
+    std::ofstream output_file(points_file_path);
 
     output_file << "x,y\n";
 
@@ -43,9 +43,8 @@ void Evolution::run_simulation(int number_of_generations, int save_step)
 
         if (i%save_step == 0)
         {
-            std::string file_path = "resources/generations/parameters_" +
-                std::to_string(i) + ".csv";
-            parameters.write_to_file(file_path);
+            parameters.write_to_file(
+                parameters_file_path + std::to_string(i) + ".csv");
         }
     }
 }
