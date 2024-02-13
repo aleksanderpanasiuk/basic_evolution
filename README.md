@@ -20,8 +20,8 @@ int main()
 {
     srand(time(0));
 
-    // Initialize evolution class with default settings
-    Evolution evolution;
+    // Initialize evolution class with creature population of 200 and 10 points
+    Evolution evolution(200, 10);
     // Pick random points and save them
     evolution.randomize_points();
     // Fills parameters with random values
