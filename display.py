@@ -31,15 +31,19 @@ def add_plot(n, number_of_generations):
     for i in range(no_creatures):
         par = list(parameters.loc[i])
 
-        y = par[0] * np.sin((par[1]*x + par[2])*np.pi/180) + \
-            par[3] * np.sin((par[4]*x + par[5])*np.pi/180) + \
-            par[6] * np.sin((par[7]*x + par[8])*np.pi/180) + par[9]
+        y = f(x, par)
 
         axis[pos_x, pos_y].plot(x, y, linewidth=no_creatures-i)
         legend.append(f"Creature nr {i+1}")
 
     axis[pos_x, pos_y].set_title(f"Generation {number_of_generations}")
     axis[pos_x, pos_y].legend(legend)
+
+
+def f(x, par):
+    return par[0] * np.sin((par[1]*x + par[2])*np.pi/180) + \
+            par[3] * np.sin((par[4]*x + par[5])*np.pi/180) + \
+            par[6] * np.sin((par[7]*x + par[8])*np.pi/180) + par[9]
 
 
 if __name__ == "__main__":
