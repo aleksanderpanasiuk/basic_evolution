@@ -1,12 +1,23 @@
 #include "Parameters.h"
 
+
+Parameters::Parameters(int population_size, int number_of_parameters) :
+    population_size(population_size), number_of_parameters(number_of_parameters)
+{
+    for (int i = 0; i < population_size; i++)
+    {
+        std::vector<double> v(number_of_parameters+1, 0);
+        parameters.push_back(v);
+    }
+}
+
 /*  Changes every parameter value to random */
 
 void Parameters::fill_random()
 {
-    for (int i = 0; i < POPULATION_SIZE; i++)
+    for (int i = 0; i < population_size; i++)
     {
-        for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
+        for (int j = 0; j < number_of_parameters; j++)
         {
             double random_number = ((rand() % 2000000) / 10000.0) - 100;
             parameters[i][j] = random_number;
@@ -21,13 +32,13 @@ void Parameters::fill_random()
 
 void Parameters::print_top_parameters(int n=10, bool only_fitness=false)
 {
-    for (int i = 0; i < std::min(n, POPULATION_SIZE); i++)
+    for (int i = 0; i < std::min(n, population_size); i++)
     {
         std::cout << i << ": ";
 
         if (!only_fitness)
         {
-            for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
+            for (int j = 0; j < number_of_parameters; j++)
             {
                 std::cout << parameters[i][j] << " | ";
             }
@@ -58,9 +69,9 @@ double Parameters::calculate_function(double x, std::vector<double> par)
 
 void Parameters::calculate_fitness(int no_points, std::vector<std::pair<double, double>>& points)
 {
-    for (int i = 0; i < POPULATION_SIZE; i++)
+    for (int i = 0; i < population_size; i++)
     {
-        parameters[i][NUMBER_OF_PARAMETERS] = 0;
+        parameters[i][number_of_parameters] = 0;
 
         for (int j = 0; j < no_points; j++)
         {
@@ -69,10 +80,10 @@ void Parameters::calculate_fitness(int no_points, std::vector<std::pair<double, 
             double point_y = points[j].second;
             double fitness = std::abs(point_y - y);
 
-            parameters[i][NUMBER_OF_PARAMETERS] += (fitness * fitness);
+            parameters[i][number_of_parameters] += (fitness * fitness);
         }
 
-        // parameters[i][NUMBER_OF_PARAMETERS] /= no_points;
+        // parameters[i][number_of_parameters] /= no_points;
     }
 }
 
@@ -97,14 +108,14 @@ void Parameters::write_to_file(std::string file_path)
 
     output_file << "a1,k1,p1,a2,k2,p2,a3,k3,p3,c,fitness\n";
 
-    for (int i = 0; i < POPULATION_SIZE; i++)
+    for (int i = 0; i < population_size; i++)
     {
-        for (int j = 0; j < NUMBER_OF_PARAMETERS; j++)
+        for (int j = 0; j < number_of_parameters; j++)
         {
             output_file << parameters[i][j] << ", ";
         }
 
-        output_file << parameters[i][NUMBER_OF_PARAMETERS] << "\n";
+        output_file << parameters[i][number_of_parameters] << "\n";
     }
 
     output_file.close();
@@ -127,9 +138,9 @@ void Parameters::read_from_file(std::string file_path)
         std::string header;
         input_file >> header;
 
-        for (int i = 0; i < POPULATION_SIZE; i++)
+        for (int i = 0; i < population_size; i++)
         {
-            for (int j = 0; j <= NUMBER_OF_PARAMETERS; j++)
+            for (int j = 0; j <= number_of_parameters; j++)
             {
                 std::string comma;
                 input_file >> parameters[i][j] >> comma;
@@ -145,9 +156,9 @@ void Parameters::read_from_file(std::string file_path)
 
 void Parameters::kill_bottom(int n)
 {
-    for (int i = POPULATION_SIZE-n; i < POPULATION_SIZE; i++)
+    for (int i = population_size-n; i < population_size; i++)
     {
-        for (int j = 0; j <= NUMBER_OF_PARAMETERS; j++)
+        for (int j = 0; j <= number_of_parameters; j++)
             parameters[i][j] = 0;
     }
 
@@ -162,17 +173,17 @@ void Parameters::pairing(int n)
     std::vector<int> population;
     std::vector<std::pair<int, int>> pairs;
 
-    for (int i = 0; i < POPULATION_SIZE-n; i++)
+    for (int i = 0; i < population_size-n; i++)
         population.push_back(i);
 
     random_shuffle(population.begin(), population.end());
 
-    for (int i = 0; i < POPULATION_SIZE-n; i+= 2)
+    for (int i = 0; i < population_size-n; i+= 2)
     {
         pairs.push_back(std::make_pair(population[i], population[i+1]));
     }
 
-    for (int i = 0; i < (POPULATION_SIZE-n)/2; i++)
+    for (int i = 0; i < (population_size-n)/2; i++)
     {
         std::pair<std::vector<double>, std::vector<double>> p = mating(pairs[i].first, pairs[i].second);
 
@@ -214,7 +225,7 @@ std::pair<std::vector<double>, std::vector<double>> Parameters::mating(int a, in
     std::vector<double> c;
     std::vector<double> d;
 
-    for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
+    for (int i = 0; i < number_of_parameters; i++)
     {
         if (0 == rand()%2)
         {

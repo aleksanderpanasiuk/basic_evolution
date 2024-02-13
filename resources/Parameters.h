@@ -10,10 +10,13 @@
 class Parameters
 {
     private:
-        const int POPULATION_SIZE = 200, NUMBER_OF_PARAMETERS = 10;
-        std::vector<double> v = *new std::vector<double>(NUMBER_OF_PARAMETERS+1, 0);
-        std::vector<std::vector<double>> parameters = *new std::vector<std::vector<double>>(POPULATION_SIZE, v);
+        int population_size;
+        int number_of_parameters;
+
+        std::vector<std::vector<double>> parameters;
     public:
+        Parameters(int population_size, int number_of_parameters);
+
         void fill_random();
         void print_top_parameters(int n, bool only_fitness);
         double calculate_function(double x, std::vector<double> par);
