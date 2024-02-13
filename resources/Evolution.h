@@ -6,7 +6,7 @@
 class Evolution
 {
     private:
-        int creatures_to_kill;
+        int creatures_to_kill = 100;
         int number_of_points = 10;
         Points points = *new Points(number_of_points);
         Parameters parameters;
