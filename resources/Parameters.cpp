@@ -1,11 +1,5 @@
 #include "Parameters.h"
 
-#include <iostream>
-#include <cmath>
-#include <fstream>
-#include <algorithm>
-#include <vector>
-
 /*  Changes every parameter value to random */
 
 void Parameters::fill_random()

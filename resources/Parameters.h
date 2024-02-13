@@ -1,6 +1,10 @@
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
+
 #include <iostream>
+#include <cmath>
+#include <fstream>
+#include <algorithm>
 #include <vector>
 
 class Parameters
