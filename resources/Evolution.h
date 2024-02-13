@@ -2,6 +2,8 @@
 #define EVOLUTION_H
 
 #include "Parameters.h"
+#include <fstream>
+
 
 class Evolution
 {
@@ -14,8 +16,6 @@ class Evolution
     public:
         Evolution();
         void randomize_points();
-        void read_points();
-        int get_number_of_points();
         void fill_random_parameters();
         void run_simulation(int number_of_generations, int save_step);
 };

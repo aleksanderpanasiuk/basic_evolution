@@ -15,11 +15,17 @@ void Evolution::randomize_points()
 
         points.push_back({x, y});
     }
-}
 
-int Evolution::get_number_of_points()
-{
-    return number_of_points;
+    std::ofstream output_file("resources/points.csv");
+
+    output_file << "x,y\n";
+
+    for (std::pair<double, double>& p : points)
+    {
+        output_file << p.first << ", " << p.second << "\n";
+    }
+
+    output_file.close();
 }
 
 void Evolution::fill_random_parameters()
